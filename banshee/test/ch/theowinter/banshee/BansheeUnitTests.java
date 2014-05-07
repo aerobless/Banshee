@@ -15,6 +15,9 @@ public class BansheeUnitTests {
 	public void speakTest(){
 		TextToSpeech ttsEngine = new TextToSpeech();
 		assertTrue(ttsEngine.speak("Test successful"));
+		assertTrue(ttsEngine.speak("sadfasdfasdfsadfsdfasdf"));
+		assertTrue(ttsEngine.speak("Hello world this is a long string."));
 	}
+	
 
 }

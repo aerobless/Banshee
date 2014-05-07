@@ -6,5 +6,4 @@ public class BansheeApplication {
 		System.out.println("Application works");
 
 	}
-
 }

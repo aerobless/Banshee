@@ -15,8 +15,14 @@ public class TextToSpeech {
         String [] speak = new String[]{"say", message};
         Runtime rtSpeak = Runtime.getRuntime();
         try {
-			rtSpeak.exec(speak);
-			success=true;
+        	/* The scanner prevents the method to end before 
+        	 * the entire string has been spoken. So that we 
+        	 * don't get words within words ;-).
+        	 */
+        	java.util.Scanner s = new java.util.Scanner(rtSpeak.exec(speak).getInputStream());
+        	s.hasNext();
+        	s.close();
+        	success=true;
 		} catch (IOException e) {
 			Logger.log("IOException when trying to run shell tts", e);
 		}
