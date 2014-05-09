@@ -7,13 +7,11 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.junit.Test;
-import org.xml.sax.SAXException;
 
 import ch.theowinter.banshee.utilities.WebUtility;
 import ch.theowinter.banshee.weather.WeatherManager;
+import ch.theowinter.banshee.weather.WeatherSnapshot;
 
 public class BansheeUnitTests {
 
@@ -66,22 +64,17 @@ public class BansheeUnitTests {
 	}
 	
 	@Test
-	public void readWeatherXMLTest(){
-		WebUtility webutil = new WebUtility();
-		WeatherManager weather = new WeatherManager();
-		String result = null;
-		try {
-			result = webutil.webToString(weather.buildWeatherURL());
-			weather.parseXMLToWeatherMap(result);
-		} catch (IOException anEx) {
-			anEx.printStackTrace();
-		} catch (SAXException anEx) {
-			// TODO Auto-generated catch block
-			anEx.printStackTrace();
-		} catch (ParserConfigurationException anEx) {
-			// TODO Auto-generated catch block
-			anEx.printStackTrace();
-		}
+	public void weatherManagerTest(){
+		WeatherManager weatherManager = new WeatherManager();
+		WeatherSnapshot weather0600 = weatherManager.getWeatherFor("06:00");
+		WeatherSnapshot weather1100 = weatherManager.getWeatherFor("11:00");
+		assertEquals("06:00", weather0600.getSnapshotTime());
+		assertEquals("11:00", weather1100.getSnapshotTime());
+		assertTrue(weather0600.getCityCode().length()>1);
+		assertTrue(weather1100.getLocationName().length()>1);
+		assertTrue(weather0600.getMaxTemperature()>=weather0600.getMinTemperature());
+		assertTrue(weather1100.getMaxTemperature()>=weather1100.getMinTemperature());
+		assertTrue(weather1100.getWeatherType()>=0);
 	}
 	
 	public void testLog(String message, boolean indent){
