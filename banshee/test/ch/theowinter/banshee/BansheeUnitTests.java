@@ -34,10 +34,10 @@ public class BansheeUnitTests {
 	
 	@Test
 	public void md5CalculationTest(){
-		WeatherManager weather = new WeatherManager();
+		WebUtility webutil = new WebUtility();
 		String md5 = null;
 		try {
-			md5 = weather.MD5("bansheeeff00651d20075bef02b0e95dd0aa40eCH0CH1894");
+			md5 = webutil.MD5("bansheeeff00651d20075bef02b0e95dd0aa40eCH0CH1894");
 		} catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}

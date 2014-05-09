@@ -3,8 +3,10 @@ package ch.theowinter.banshee.utilities;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.security.NoSuchAlgorithmException;
 
 public class WebUtility {
 	
@@ -29,5 +31,15 @@ public class WebUtility {
 		    baos.write(buf, 0, len);
 		}
 		return new String(baos.toByteArray(), encoding);
+	}
+	
+	public String MD5(String md5) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+	    java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+	    byte[] array = md.digest(md5.getBytes("UTF-8"));
+	    StringBuffer sb = new StringBuffer();
+	    for (int i = 0; i < array.length; ++i) {
+	      sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));
+	    }
+	    return sb.toString();
 	}
 }
