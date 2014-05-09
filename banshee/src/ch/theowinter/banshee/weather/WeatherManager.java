@@ -1,7 +1,20 @@
-package ch.theowinter.banshee;
+package ch.theowinter.banshee.weather;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
+
+import ch.theowinter.banshee.Logger;
 
 public class WeatherManager {
 	private final static String SEARCH_URL = "http://api.wetter.com/forecast/weather";
@@ -32,4 +45,14 @@ public class WeatherManager {
 	    return sb.toString();
 	}
 	
+	public void parseWeatherXML(String input) throws SAXException, IOException, ParserConfigurationException{
+		InputStream stream = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
+		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
+		        .newInstance();
+		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
+		Document document = documentBuilder.parse(stream);
+		
+		System.out.println(document.getElementsByTagName("city_code").item(0).getTextContent());
+		System.out.println(document.getElementsByTagName("tx").item(1).getTextContent());
+	}
 }

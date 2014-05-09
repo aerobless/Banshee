@@ -7,9 +7,13 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.junit.Test;
+import org.xml.sax.SAXException;
 
 import ch.theowinter.banshee.utilities.WebUtility;
+import ch.theowinter.banshee.weather.WeatherManager;
 
 public class BansheeUnitTests {
 
@@ -59,6 +63,25 @@ public class BansheeUnitTests {
 			anEx.printStackTrace();
 		}
 		assertTrue(result.length()>150);
+	}
+	
+	@Test
+	public void readWeatherXMLTest(){
+		WebUtility webutil = new WebUtility();
+		WeatherManager weather = new WeatherManager();
+		String result = null;
+		try {
+			result = webutil.webToString(weather.buildWeatherURL());
+			weather.parseWeatherXML(result);
+		} catch (IOException anEx) {
+			anEx.printStackTrace();
+		} catch (SAXException anEx) {
+			// TODO Auto-generated catch block
+			anEx.printStackTrace();
+		} catch (ParserConfigurationException anEx) {
+			// TODO Auto-generated catch block
+			anEx.printStackTrace();
+		}
 	}
 	
 	public void testLog(String message, boolean indent){

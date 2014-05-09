@@ -6,13 +6,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
-
 public class WebUtility {
 	
 	/**
@@ -36,15 +29,5 @@ public class WebUtility {
 		    baos.write(buf, 0, len);
 		}
 		return new String(baos.toByteArray(), encoding);
-	}
-	
-	public void readXML(String input) throws SAXException, IOException, ParserConfigurationException{
-		
-		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
-		        .newInstance();
-		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-		Document document = documentBuilder.parse(input);
-		String usr = document.getElementsByTagName("user").item(0).getTextContent();
-		String pwd = document.getElementsByTagName("password").item(0).getTextContent();
 	}
 }
