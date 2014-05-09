@@ -5,7 +5,7 @@ public class BansheeApplication {
 	public static void main(String[] args) {
 		System.out.println("Application works");
 		BansheeInterpreter banshee = new BansheeInterpreter();
-		banshee.announceWaker();
+		banshee.announceGreeting();
 		banshee.announceWeather();
 
 	}

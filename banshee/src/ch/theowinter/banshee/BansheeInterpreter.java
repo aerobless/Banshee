@@ -16,8 +16,16 @@ public class BansheeInterpreter {
 		voice = new TextToSpeech();	
 	}
 	
-	public void announceWaker(){
-		voice.speak("Good morning.");
+	public void announceGreeting(){
+		if(currentHour()>3 && currentHour()<=9){
+			voice.speak("Good morning.");
+		} else if (currentHour()<=14) {
+			voice.speak("Hello.");
+		} else if (currentHour()<=20) {
+			voice.speak("Good afternoon.");
+		} else {
+			voice.speak("Good evening.");
+		}
 		voice.speak("It's "+simpleTimeString());
 	}
 
@@ -28,6 +36,7 @@ public class BansheeInterpreter {
 		WeatherSnapshot afternoon = weather.getWeatherFor("17:00");
 		WeatherSnapshot night = weather.getWeatherFor("23:00");
 		WeatherSnapshot current = null;
+
 		
 		//Set current weather
 		if(currentHour()>3 && currentHour()<=9){
@@ -43,7 +52,16 @@ public class BansheeInterpreter {
 		int averageTemp = (current.getMaxTemperature()+current.getMinTemperature())/2;
 		voice.speak("The weather in Rah-ppersvil is "+averageTemp+" degrees.");
 		voice.speak("It is currently "+WeatherTypes.weatherTypes.get(current.getWeatherType()));
-		voice.speak("and it will be "+WeatherTypes.weatherTypes.get(afternoon.getWeatherType())+"when you get home from school.");
+		
+		if(currentHour()>3 && currentHour()<=9){
+			voice.speak(" around midday it will be "+WeatherTypes.weatherTypes.get(midday.getWeatherType())+"when you get home from school.");
+		} else if (currentHour()<=14) {
+			current = midday;
+		} else if (currentHour()<=20) {
+			current = afternoon;
+		} else {
+			current = night;
+		}
 	}
 	
 	/**
