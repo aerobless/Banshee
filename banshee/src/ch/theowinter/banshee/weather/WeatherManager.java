@@ -25,7 +25,7 @@ public class WeatherManager {
 	private final static String SEARCH_URL = "http://api.wetter.com/forecast/weather";
 	private final static String PROJECT_NAME = "banshee";
 	private final static String API_KEY = "eff00651d20075bef02b0e95dd0aa40e";
-	private final static String CITY_CODE = "CH0CH1894";
+	private final static String CITY_CODE = "CH0CH3201";
 	
 	//Containers
 	private Map<String, WeatherSnapshot> weatherMap;

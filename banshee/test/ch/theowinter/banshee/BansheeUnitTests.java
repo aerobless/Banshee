@@ -46,9 +46,9 @@ public class BansheeUnitTests {
 	public void buildWeatherURLTest(){
 		WeatherManager weather = new WeatherManager();
 		String weatherURL = weather.buildWeatherURL();
-		String expectedURL = "http://api.wetter.com/forecast/weather/city/CH0CH1894/project/banshee/cs/68d3a19b46d79faccd4c8cbbbdbcca10";
-		assertEquals(expectedURL, weatherURL);
 		testLog(weatherURL, true);
+		String expectedURL = "http://api.wetter.com/forecast/weather/city/CH0CH3201/project/banshee/cs/06efa06c37845169cd219a85f220f4c5";
+		assertEquals(expectedURL, weatherURL);
 	}
 	
 	@Test
