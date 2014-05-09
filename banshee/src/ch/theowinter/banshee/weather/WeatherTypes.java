@@ -5,6 +5,8 @@ import java.util.Map;
 
 public class WeatherTypes {
 	public static final Map<Integer, String> weatherTypes = buildWeatherList();
+	public static final int[] badWeatherArray = new int[]{6,7,9,50,53,55,56,57,
+		60,61,63,67,68,69,73,75,80,81,82,83,84,85,86,90,95,96};
 	
 	private static final Map<Integer, String> buildWeatherList(){
 		Map<Integer, String> weatherTypeMap	= new HashMap<Integer, String>();
