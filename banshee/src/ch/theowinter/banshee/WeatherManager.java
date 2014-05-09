@@ -31,4 +31,5 @@ public class WeatherManager {
 	    }
 	    return sb.toString();
 	}
+	
 }

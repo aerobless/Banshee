@@ -1,11 +1,15 @@
 package ch.theowinter.banshee;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
 import org.junit.Test;
+
+import ch.theowinter.banshee.utilities.WebUtility;
 
 public class BansheeUnitTests {
 
@@ -43,6 +47,18 @@ public class BansheeUnitTests {
 		String expectedURL = "http://api.wetter.com/forecast/weather/city/CH0CH1894/project/banshee/cs/68d3a19b46d79faccd4c8cbbbdbcca10";
 		assertEquals(expectedURL, weatherURL);
 		testLog(weatherURL, true);
+	}
+	
+	@Test
+	public void websiteDownloadToStringTest(){
+		WebUtility webutil = new WebUtility();
+		String result = null;
+		try {
+			result = webutil.webToString("http://google.com");
+		} catch (IOException anEx) {
+			anEx.printStackTrace();
+		}
+		assertTrue(result.length()>150);
 	}
 	
 	public void testLog(String message, boolean indent){
