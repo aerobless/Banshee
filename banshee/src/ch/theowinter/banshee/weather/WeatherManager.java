@@ -14,6 +14,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import ch.theowinter.banshee.Logger;
@@ -39,10 +40,36 @@ public class WeatherManager {
 	 */
 	public WeatherManager() {
 		super();
-		weatherMap = new HashMap<String, WeatherSnapshot>();
 		webUtil = new WebUtility();
+		weatherMap = new HashMap<String, WeatherSnapshot>();
+		
+		//Run last:
+		updateWeather();
+	}
+	
+	/**
+	 * Update the weather data stored in your instance of
+	 * WeatherManager.
+	 */
+	public void updateWeather(){
+		String weatherURL = buildWeatherURL();
+		try {
+			weatherMap = parseXMLToWeatherMap(webUtil.webToString(weatherURL));
+		} catch (IOException e) {
+			Logger.log("IOException while trying to update the weather in the WeatherManager.", e);
+		} catch (SAXException e) {
+			Logger.log("SAXException while trying to update the weather in the WeatherManager.", e);
+		} catch (ParserConfigurationException e) {
+			Logger.log("ParserConfigurationException while trying to update the weather in the WeatherManager.", e);
+		}
 	}
 
+	/**
+	 * Create the URL to get XML-weather information from
+	 * wetter.com.
+	 *
+	 * @return URL
+	 */
 	public String buildWeatherURL(){
 		String result = null;
 		try {
@@ -56,14 +83,46 @@ public class WeatherManager {
 		return result;
 	}
 	
-	public void parseWeatherXML(String input) throws SAXException, IOException, ParserConfigurationException{
+	/**
+	 * Create a weatherMap from an XML-String containing weather data.
+	 *
+	 * @param input
+	 * @return
+	 * @throws SAXException
+	 * @throws IOException
+	 * @throws ParserConfigurationException
+	 */
+	public Map<String, WeatherSnapshot> parseXMLToWeatherMap(String input) throws SAXException, IOException, ParserConfigurationException{
 		InputStream stream = new ByteArrayInputStream(input.getBytes(StandardCharsets.UTF_8));
-		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
-		        .newInstance();
+		DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 		Document document = documentBuilder.parse(stream);
 		
-		System.out.println(document.getElementsByTagName("city_code").item(0).getTextContent());
-		System.out.println(document.getElementsByTagName("tx").item(1).getTextContent());
+		Map<String, WeatherSnapshot> localWeatherMap = new HashMap<String, WeatherSnapshot>();
+		
+		for(int i=0; i<document.getElementsByTagName("time").getLength(); i++){
+			NodeList timeNode = document.getElementsByTagName("time").item(i).getChildNodes();
+			String locationName = document.getElementsByTagName("name").item(0).getTextContent();
+			String cityCode = document.getElementsByTagName("city_code").item(0).getTextContent();
+			String snapshotTime = document.getElementsByTagName("time").item(i).getAttributes().item(0).getTextContent();
+			int maxTemperature = Integer.parseInt(timeNode.item(3).getTextContent());
+			int minTemperature = Integer.parseInt(timeNode.item(5).getTextContent());
+			int weatherType = Integer.parseInt(timeNode.item(1).getTextContent());
+			localWeatherMap.put(snapshotTime, new WeatherSnapshot(locationName, cityCode, snapshotTime, maxTemperature, minTemperature, weatherType));	
+		}
+		return localWeatherMap;
+	}
+	
+	
+	/**
+	 * Get a weatherSnapshot containing min temperature, max temperature and
+	 * weather type for a specific time. Please note that only the following key-times
+	 * are indexed: 06:00, 11:00, 17:00, 23:00 any other requested time will return null.
+	 *
+	 * @param time
+	 * @return WeatherSnapshot
+	 */
+	public WeatherSnapshot getWeatherFor(String time){
+		return weatherMap.get(time);
 	}
 }

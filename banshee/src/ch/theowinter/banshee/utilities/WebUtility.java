@@ -33,9 +33,17 @@ public class WebUtility {
 		return new String(baos.toByteArray(), encoding);
 	}
 	
-	public String MD5(String md5) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+	/**
+	 * Generate a md5 value as a string from a string.
+	 *
+	 * @param input
+	 * @return md5
+	 * @throws NoSuchAlgorithmException
+	 * @throws UnsupportedEncodingException
+	 */
+	public String MD5(String input) throws NoSuchAlgorithmException, UnsupportedEncodingException {
 	    java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
-	    byte[] array = md.digest(md5.getBytes("UTF-8"));
+	    byte[] array = md.digest(input.getBytes("UTF-8"));
 	    StringBuffer sb = new StringBuffer();
 	    for (int i = 0; i < array.length; ++i) {
 	      sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1,3));

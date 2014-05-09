@@ -26,7 +26,7 @@ public class WeatherSnapshot {
 	 * @param aMinTemperature
 	 * @param aWeatherType
 	 */
-	private WeatherSnapshot(String aLocationName, String aCityCode,
+	WeatherSnapshot(String aLocationName, String aCityCode,
 			String aSnapshotTime, int aMaxTemperature, int aMinTemperature,
 			int aWeatherType) {
 		super();

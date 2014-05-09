@@ -72,7 +72,7 @@ public class BansheeUnitTests {
 		String result = null;
 		try {
 			result = webutil.webToString(weather.buildWeatherURL());
-			weather.parseWeatherXML(result);
+			weather.parseXMLToWeatherMap(result);
 		} catch (IOException anEx) {
 			anEx.printStackTrace();
 		} catch (SAXException anEx) {
