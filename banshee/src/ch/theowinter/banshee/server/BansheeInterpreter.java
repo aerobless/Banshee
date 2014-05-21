@@ -1,10 +1,10 @@
-package ch.theowinter.banshee;
+package ch.theowinter.banshee.server;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import ch.theowinter.banshee.weather.WeatherManager;
-import ch.theowinter.banshee.weather.WeatherSnapshot;
-import ch.theowinter.banshee.weather.WeatherTypes;
+import ch.theowinter.banshee.server.weather.WeatherManager;
+import ch.theowinter.banshee.server.weather.WeatherSnapshot;
+import ch.theowinter.banshee.server.weather.WeatherTypes;
 
 public class BansheeInterpreter {
 	WeatherManager weather;
@@ -36,7 +36,6 @@ public class BansheeInterpreter {
 		WeatherSnapshot afternoon = weather.getWeatherFor("17:00");
 		WeatherSnapshot night = weather.getWeatherFor("23:00");
 		WeatherSnapshot current = null;
-
 		
 		//Set current weather
 		if(currentHour()>3 && currentHour()<=9){

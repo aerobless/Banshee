@@ -9,9 +9,10 @@ import java.security.NoSuchAlgorithmException;
 
 import org.junit.Test;
 
-import ch.theowinter.banshee.utilities.WebUtility;
-import ch.theowinter.banshee.weather.WeatherManager;
-import ch.theowinter.banshee.weather.WeatherSnapshot;
+import ch.theowinter.banshee.server.TextToSpeech;
+import ch.theowinter.banshee.server.utilities.WebUtility;
+import ch.theowinter.banshee.server.weather.WeatherManager;
+import ch.theowinter.banshee.server.weather.WeatherSnapshot;
 
 public class BansheeUnitTests {
 
@@ -32,7 +33,7 @@ public class BansheeUnitTests {
 	
 	@Test
 	public void md5CalculationTest(){
-		WebUtility webutil = new WebUtility();
+		ch.theowinter.banshee.server.utilities.WebUtility webutil = new WebUtility();
 		String md5 = null;
 		try {
 			md5 = webutil.MD5("bansheeeff00651d20075bef02b0e95dd0aa40eCH0CH1894");

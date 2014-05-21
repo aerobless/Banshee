@@ -1,4 +1,4 @@
-package ch.theowinter.banshee.weather;
+package ch.theowinter.banshee.server.weather;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -17,8 +17,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import ch.theowinter.banshee.Logger;
-import ch.theowinter.banshee.utilities.WebUtility;
+import ch.theowinter.banshee.server.utilities.WebUtility;
+import ch.theowinter.banshee.shared.Logger;
 
 public class WeatherManager {
 	//Settings (will probably be moved to their own settings class sometime)
@@ -31,7 +31,7 @@ public class WeatherManager {
 	private Map<String, WeatherSnapshot> weatherMap;
 	
 	//Tools
-	WebUtility webUtil;
+	ch.theowinter.banshee.server.utilities.WebUtility webUtil;
 	
 	/**
 	 * Creates a new instance of this class.

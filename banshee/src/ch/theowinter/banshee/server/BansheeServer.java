@@ -1,6 +1,7 @@
-package ch.theowinter.banshee;
+package ch.theowinter.banshee.server;
 
-public class BansheeApplication {
+
+public class BansheeServer {
 
 	public static void main(String[] args) {
 		System.out.println("Application works");

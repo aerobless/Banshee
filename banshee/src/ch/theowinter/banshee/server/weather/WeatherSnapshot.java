@@ -1,4 +1,4 @@
-package ch.theowinter.banshee.weather;
+package ch.theowinter.banshee.server.weather;
 
 import java.util.Date;
 

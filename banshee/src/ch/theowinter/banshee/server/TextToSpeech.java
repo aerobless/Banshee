@@ -1,6 +1,8 @@
-package ch.theowinter.banshee;
+package ch.theowinter.banshee.server;
 
 import java.io.IOException;
+
+import ch.theowinter.banshee.shared.Logger;
 
 public class TextToSpeech {
 	

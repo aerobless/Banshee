@@ -1,4 +1,4 @@
-package ch.theowinter.banshee.utilities;
+package ch.theowinter.banshee.server.utilities;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

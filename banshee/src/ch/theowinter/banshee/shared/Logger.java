@@ -1,4 +1,4 @@
-package ch.theowinter.banshee;
+package ch.theowinter.banshee.shared;
 
 public final class Logger {
 	
